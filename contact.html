@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact Mad Forge — Request a free quote for your website project. We'll reply within 24 hours with a clear scope, timeline, and pricing." />
+  <meta property="og:title" content="Contact | Mad Forge" />
+  <meta property="og:type" content="website" />
+  <title>Contact | Mad Forge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html">
+        <img src="assets/Mad Forge Logo.png" alt="Mad Forge Logo" class="brand-logo" />
+        Mad Forge
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="process.html">Process</a>
+        <a href="about.html">About</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html" class="nav-cta active">Get a Quote</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero reveal">
+      <div class="container">
+        <p class="eyebrow">Get in Touch</p>
+        <h1>Ready for a website that looks premium and brings in leads?</h1>
+        <p class="lead">
+          Send your details and we'll reply with a recommended approach, timeline, and next steps
+          — all within 24 hours.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="contact-wrap">
+          <div class="contact-intro reveal">
+            <p class="eyebrow">Why reach out</p>
+            <h2>Professional, clear, and focused on your results.</h2>
+            <p>
+              Every inquiry we receive is read carefully and responded to personally. We'll take the time to
+              understand your business before making any recommendations.
+            </p>
+
+            <ul class="contact-points">
+              <li>Response within 24 hours</li>
+              <li>Clear scope and timeline guidance</li>
+              <li>Simple, professional collaboration process</li>
+              <li>Free quotes with sample websites on request</li>
+              <li>No obligation, no pressure</li>
+            </ul>
+
+            <div class="contact-badges">
+              <span class="badge">📧 24hr response</span>
+              <span class="badge">🔒 Privacy respected</span>
+              <span class="badge">💬 Direct communication</span>
+            </div>
+          </div>
+
+          <form class="contact-form reveal" id="contactForm" novalidate style="--reveal-delay:100ms">
+            <label>
+              <span>Full Name *</span>
+              <input type="text" name="name" placeholder="Your full name" required />
+            </label>
+            <label>
+              <span>Email Address *</span>
+              <input type="email" name="email" placeholder="you@yourbusiness.com" required />
+            </label>
+            <label>
+              <span>Business Name</span>
+              <input type="text" name="business" placeholder="Your business name" />
+            </label>
+            <label>
+              <span>Project Details *</span>
+              <textarea name="details" rows="5" placeholder="Tell us about your business and the website you need. Include any style preferences, pages needed, or goals..." required></textarea>
+            </label>
+            <button type="submit" class="btn btn-primary">Send Request →</button>
+            <p class="form-note" id="formMessage" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reassurance strip -->
+    <section class="section section-alt reveal">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">What happens next</p>
+          <h2>A straightforward process after you reach out</h2>
+        </div>
+        <div class="timeline" style="grid-template-columns: repeat(3, 1fr);">
+          <article>
+            <div class="timeline-num">01</div>
+            <h3>You send your request</h3>
+            <p>Fill in the form above with your name, contact details, and a brief description of what you're looking for.</p>
+          </article>
+          <article>
+            <div class="timeline-num">02</div>
+            <h3>We review and respond</h3>
+            <p>Within 24 hours, you'll receive a personalised response with our recommended approach, expected timeline, and pricing.</p>
+          </article>
+          <article>
+            <div class="timeline-num">03</div>
+            <h3>We start your project</h3>
+            <p>Once you're happy to proceed, we schedule a discovery call and kick off your project with a clear plan in place.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-wrap">
+      <p>© <span id="year"></span> Mad Forge. All rights reserved.</p>
+      <nav class="footer-links">
+        <a href="services.html">Services</a>
+        <a href="process.html">Process</a>
+        <a href="about.html">About</a>
+        <a href="faq.html">FAQ</a>
+        <a href="mailto:kksummitweb@gmail.com">kksummitweb@gmail.com</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
