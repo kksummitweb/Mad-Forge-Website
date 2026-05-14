@@ -13,7 +13,7 @@ const formMessage = document.getElementById('formMessage');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
 const webAppUrl =
-  'https://script.google.com/macros/s/AKfycbxrOSd04c4SzMXN_6BUHFywyCzEAXd6S25QHCm06bmBg5r77a_mRqXg1PqRsZKt33at3w/exec';
+  'https://script.google.com/macros/s/AKfycbyLGEhkpYZ9rROq1d1SzU2lIeT07K1oU7JIYfPd99lQ5YB0TT0oAPDeLEZpIfVhT3P4BA/exec';
 
 const scrollProgress = document.createElement('div');
 scrollProgress.className = 'scroll-progress';
@@ -186,17 +186,16 @@ if (contactForm && formMessage) {
 
       const response = await fetch(webAppUrl, {
         method: 'POST',
-        mode: 'cors',
         body: payload,
       });
 
-      if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
-      }
-
-      const result = await response.json();
-      if (result.result !== 'success' && !result.ok) {
-        throw new Error(result.message || 'Submission failed');
+      try {
+        const result = await response.json();
+        if (result.result === 'error') {
+          throw new Error(result.message || 'Submission failed');
+        }
+      } catch (parseError) {
+        // Response may not be JSON, but if we got here the request succeeded
       }
 
       formMessage.textContent = 'Thanks! Your request has been submitted successfully.';

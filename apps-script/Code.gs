@@ -5,6 +5,7 @@ function doPost(e) {
 
     var name = String(p.name || '').trim();
     var email = String(p.email || '').trim();
+    var phone = String(p.phone || '').trim();
     var business = String(p.business || '').trim();
     var details = String(p.details || '').trim();
     var submittedAt = String(p.submittedAt || '').trim() || new Date().toISOString();
@@ -19,7 +20,7 @@ function doPost(e) {
       var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
       if (spreadsheet) {
         var sheet = spreadsheet.getActiveSheet();
-        sheet.appendRow([submittedAt, name, email, business, details, sourcePage]);
+        sheet.appendRow([submittedAt, name, email, phone, business, details, sourcePage]);
       }
     } catch (_sheetError) {
       // Continue sending email even if sheet logging fails.
@@ -30,6 +31,7 @@ function doPost(e) {
       'New form submission:\n\n' +
       'Name: ' + name + '\n' +
       'Email: ' + email + '\n' +
+      'Phone: ' + (phone || 'Not provided') + '\n' +
       'Business: ' + (business || 'Not provided') + '\n' +
       'Details: ' + details + '\n' +
       'Time: ' + submittedAt + '\n' +
