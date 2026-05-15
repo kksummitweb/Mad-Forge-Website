@@ -6,6 +6,7 @@
   - Scroll reveal
   - 3D tilt hover
   - Contact form front-end validation
+  - Portfolio iframe preview scaling
 */
 
 const body = document.body;
@@ -155,4 +156,23 @@ if (contactForm && formMessage) {
     formMessage.className = 'form-note success';
     contactForm.reset();
   });
+}
+
+// Portfolio iframe preview scaling
+// Each iframe is rendered at 1366×854 then scaled down to fill its container
+const IFRAME_WIDTH = 1366;
+
+function scalePortfolioPreviews() {
+  document.querySelectorAll('.portfolio-media').forEach((container) => {
+    const iframe = container.querySelector('iframe');
+    if (!iframe) return;
+    const baseWidth = parseFloat(container.dataset.baseWidth) || IFRAME_WIDTH;
+    const scale = container.offsetWidth / baseWidth;
+    iframe.style.transform = `scale(${scale})`;
+  });
+}
+
+if (document.querySelector('.portfolio-media iframe')) {
+  scalePortfolioPreviews();
+  window.addEventListener('resize', scalePortfolioPreviews, { passive: true });
 }

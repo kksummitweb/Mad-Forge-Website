@@ -569,11 +569,31 @@ img {
 }
 
 .portfolio-media {
+  position: relative;
   aspect-ratio: 16 / 10;
   border-radius: 12px;
   border: 1px solid var(--line);
   background: linear-gradient(140deg, rgba(91, 123, 255, 0.26), rgba(61, 207, 255, 0.2), rgba(141, 103, 255, 0.24));
   margin-bottom: 0.8rem;
+  overflow: hidden;
+}
+
+.portfolio-media iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1366px;
+  height: 854px;
+  border: none;
+  transform-origin: top left;
+  pointer-events: none;
+}
+
+.portfolio-media-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 12px;
 }
 
 .portfolio-card h3 {
