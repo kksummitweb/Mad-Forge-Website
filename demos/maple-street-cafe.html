@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maple Street Cafe | Coffee & Community in Madison, WI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brown: #4a2c17;
+      --caramel: #c87941;
+      --cream: #fdf6ed;
+      --warm: #f5e8d3;
+      --green: #2d5a3d;
+      --text: #2a1a0e;
+      --muted: #7a5c42;
+      --border: #e8d5bc;
+      --radius: 14px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--cream); }
+
+    /* NAV */
+    nav { background: var(--brown); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 68px; position: sticky; top: 0; z-index: 100; }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 19px; color: var(--cream); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { color: rgba(253,246,237,0.7); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--cream); }
+    .nav-cta { background: var(--caramel); color: var(--cream) !important; padding: 9px 20px; border-radius: 8px; font-weight: 600 !important; }
+    .demo-ribbon { background: rgba(91,123,255,0.08); border-bottom: 1px solid rgba(91,123,255,0.25); text-align: center; padding: 8px; font-size: 12px; color: #7a9aff; letter-spacing: 0.5px; }
+    .demo-ribbon a { color: #a0b8ff; text-decoration: none; font-weight: 600; }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, var(--brown) 0%, #3a1e0e 55%, #2a150a 100%); color: var(--cream); padding: 90px 5% 80px; display: flex; align-items: center; gap: 60px; min-height: 520px; }
+    .hero-content { flex: 1; max-width: 580px; }
+    .hero-tag { display: inline-block; background: rgba(200,121,65,0.2); border: 1px solid rgba(200,121,65,0.4); color: var(--caramel); border-radius: 99px; padding: 6px 16px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 22px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(38px,5vw,58px); line-height: 1.1; margin-bottom: 20px; }
+    .hero h1 em { font-style: italic; color: var(--caramel); }
+    .hero p { font-size: 17px; color: rgba(253,246,237,0.75); line-height: 1.7; margin-bottom: 34px; max-width: 460px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
+    .btn-caramel { background: var(--caramel); color: var(--cream); padding: 14px 28px; border-radius: var(--radius); font-weight: 700; font-size: 15px; text-decoration: none; display: inline-block; transition: background .2s, transform .2s; }
+    .btn-caramel:hover { background: #b06830; transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--cream); padding: 14px 28px; border-radius: var(--radius); font-weight: 600; font-size: 15px; text-decoration: none; display: inline-block; border: 1.5px solid rgba(253,246,237,0.3); transition: border-color .2s; }
+    .btn-outline:hover { border-color: var(--cream); }
+    .hours-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(253,246,237,0.08); border: 1px solid rgba(253,246,237,0.15); border-radius: 99px; padding: 8px 16px; font-size: 13px; color: rgba(253,246,237,0.75); }
+    .open-dot { width: 8px; height: 8px; background: #5ec97a; border-radius: 50%; }
+    .hero-img-block { flex: 0 0 340px; }
+    .cafe-card { background: var(--cream); border-radius: 20px; padding: 28px; color: var(--text); }
+    .cafe-card h3 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; margin-bottom: 18px; color: var(--brown); }
+    .menu-item { display: flex; justify-content: space-between; align-items: baseline; padding: 11px 0; border-bottom: 1px dashed var(--border); font-size: 14px; }
+    .menu-item:last-of-type { border-bottom: none; }
+    .menu-name { font-weight: 500; }
+    .menu-price { font-weight: 700; color: var(--caramel); font-size: 14px; }
+    .menu-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .social-row { display: flex; gap: 10px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .social-btn { flex: 1; text-align: center; padding: 8px; border-radius: 8px; font-size: 12px; font-weight: 600; text-decoration: none; }
+    .ig { background: #f5e8d3; color: var(--brown); }
+    .google { background: #fdf0e0; color: var(--brown); }
+
+    /* MENU SECTION */
+    .section { padding: 80px 5%; }
+    .section-alt { background: var(--warm); }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 50px; }
+    .eyebrow { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--caramel); margin-bottom: 10px; }
+    .section-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px,4vw,40px); color: var(--brown); margin-bottom: 12px; }
+    .section-header p { font-size: 16px; color: var(--muted); max-width: 500px; margin: 0 auto; }
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .menu-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 24px 20px; text-align: center; transition: transform .2s, box-shadow .2s; }
+    .menu-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(74,44,23,0.1); }
+    .menu-emoji { font-size: 32px; margin-bottom: 12px; }
+    .menu-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--brown); }
+    .menu-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .menu-card .price-tag { display: inline-block; background: var(--warm); color: var(--caramel); border-radius: 6px; padding: 3px 10px; font-size: 12px; font-weight: 700; margin-top: 10px; }
+
+    /* QUICK ACTIONS */
+    .quick-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; max-width: 900px; margin: 0 auto; }
+    .qa-card { background: var(--brown); color: var(--cream); border-radius: 14px; padding: 24px 20px; text-align: center; text-decoration: none; transition: transform .2s; }
+    .qa-card:hover { transform: translateY(-3px); }
+    .qa-icon { font-size: 28px; margin-bottom: 12px; }
+    .qa-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .qa-card p { font-size: 12px; color: rgba(253,246,237,0.65); }
+
+    /* TESTIMONIALS */
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .review-card { background: #fff; border-radius: 14px; padding: 24px; border: 1px solid var(--border); }
+    .review-stars { color: #f5a623; font-size: 14px; margin-bottom: 10px; }
+    .review-text { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 14px; font-style: italic; }
+    .reviewer { font-size: 13px; font-weight: 600; color: var(--brown); }
+
+    footer { background: var(--brown); color: rgba(253,246,237,0.55); text-align: center; padding: 28px 5%; font-size: 13px; }
+    footer a { color: #a0b8ff; text-decoration: none; }
+
+    @media (max-width: 768px) { .hero { flex-direction: column; padding: 60px 5%; } .hero-img-block { flex: unset; width: 100%; } .nav-links { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="demo-ribbon">Demo site built by <a href="../portfolio.html">Mad Forge</a> &mdash; This is a portfolio example, not a real business listing.</div>
+  <nav>
+    <a class="nav-brand" href="#">
+      <span class="nav-name">☕ Maple Street Cafe</span>
+    </a>
+    <div class="nav-links">
+      <a href="#">Menu</a>
+      <a href="#">About</a>
+      <a href="#">Events</a>
+      <a href="#" class="nav-cta">Order Online</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">🌿 Local Roasts · Scratch Kitchen</div>
+      <h1>Your Neighborhood<br><em>Third Place</em></h1>
+      <p>Great coffee, fresh food, and a space where neighbors become regulars. Come for the latte, stay for the community.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-caramel">View Our Menu</a>
+        <a href="#" class="btn-outline">Order Pickup</a>
+      </div>
+      <div class="hours-pill"><span class="open-dot"></span> Open today 7am – 8pm</div>
+    </div>
+    <div class="hero-img-block">
+      <div class="cafe-card">
+        <h3>Today's Highlights</h3>
+        <div class="menu-item">
+          <div><div class="menu-name">Maple Latte</div><div class="menu-sub">Espresso · oat milk · maple syrup</div></div>
+          <div class="menu-price">$6.50</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-name">Avocado Toast</div><div class="menu-sub">Sourdough · everything seasoning</div></div>
+          <div class="menu-price">$11</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-name">Cold Brew Flight</div><div class="menu-sub">3 seasonal blends</div></div>
+          <div class="menu-price">$9</div>
+        </div>
+        <div class="menu-item">
+          <div><div class="menu-name">Brown Butter Scone</div><div class="menu-sub">Baked fresh daily</div></div>
+          <div class="menu-price">$4.50</div>
+        </div>
+        <div class="social-row">
+          <a href="#" class="social-btn ig">📸 Instagram</a>
+          <a href="#" class="social-btn google">⭐ 4.9 on Google</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Our Menu</div>
+        <h2>Crafted with Care, Every Time</h2>
+        <p>From the first espresso pull to the last bite — everything is made fresh in our kitchen.</p>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="menu-emoji">☕</div>
+          <h3>Espresso Drinks</h3>
+          <p>Single-origin beans, hand-pulled shots, and seasonal specialty drinks year-round.</p>
+          <div class="price-tag">from $4</div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-emoji">🧊</div>
+          <h3>Cold Brew & Iced</h3>
+          <p>Slow-steeped cold brew, iced lattes, and sparkling espresso tonics.</p>
+          <div class="price-tag">from $5.50</div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-emoji">🥗</div>
+          <h3>Breakfast & Lunch</h3>
+          <p>Avocado toasts, grain bowls, sandwiches, and rotating seasonal specials.</p>
+          <div class="price-tag">from $9</div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-emoji">🧁</div>
+          <h3>Bakery</h3>
+          <p>House-baked pastries, cookies, and seasonal cakes made fresh every morning.</p>
+          <div class="price-tag">from $3.50</div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-emoji">🌿</div>
+          <h3>Matcha & Tea</h3>
+          <p>Ceremonial-grade matcha lattes and loose-leaf tea service for every taste.</p>
+          <div class="price-tag">from $5</div>
+        </div>
+        <div class="menu-card">
+          <div class="menu-emoji">🎂</div>
+          <h3>Custom Catering</h3>
+          <p>Office catering, event boxes, and large-batch coffee service. Ask us!</p>
+          <div class="price-tag">Get a quote</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Quick Actions</div>
+        <h2>Order, Visit, or Connect</h2>
+      </div>
+      <div class="quick-actions">
+        <a href="#" class="qa-card">
+          <div class="qa-icon">📱</div>
+          <h3>Order Online</h3>
+          <p>Skip the line with pickup orders ready in 10 minutes.</p>
+        </a>
+        <a href="#" class="qa-card">
+          <div class="qa-icon">🎉</div>
+          <h3>Host an Event</h3>
+          <p>Private evening buyouts and meeting space available.</p>
+        </a>
+        <a href="#" class="qa-card">
+          <div class="qa-icon">🎁</div>
+          <h3>Gift Cards</h3>
+          <p>The perfect gift for coffee lovers, available online.</p>
+        </a>
+        <a href="#" class="qa-card">
+          <div class="qa-icon">📍</div>
+          <h3>Find Us</h3>
+          <p>1147 Maple St, Madison, WI. Free street parking.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Regulars Say</div>
+        <h2>Why Maple Street is Home</h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"This is my office, my living room, and my happy place. The maple latte is genuinely one of the best drinks I've ever had."</p>
+          <div class="reviewer">— Ashley M., Madison</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"They know my order by heart now. The staff makes you feel like you've been coming here for years from day one."</p>
+          <div class="reviewer">— Devon P., Madison</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Best avocado toast in the city, no contest. And the cold brew flight is an absolute must-try if you haven't had it yet."</p>
+          <div class="reviewer">— Kayla R., Fitchburg</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong style="color: #fdf6ed;">Maple Street Cafe</strong> &mdash; 1147 Maple St, Madison, WI &nbsp;|&nbsp; Mon–Fri 7am–8pm, Sat–Sun 8am–6pm &nbsp;|&nbsp; &copy; 2025</p>
+    <p style="margin-top: 8px; font-size: 11px;">Demo website designed by <a href="../portfolio.html">Mad Forge</a>. Content is fictional.</p>
+  </footer>
+</body>
+</html>

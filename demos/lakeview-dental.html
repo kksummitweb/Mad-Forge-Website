@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lakeview Dental | Family & Cosmetic Dentistry in Madison, WI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal: #0a7e6e;
+      --teal-light: #0ea895;
+      --teal-pale: #e8faf7;
+      --blue: #1a6eb5;
+      --text: #142535;
+      --muted: #4e6778;
+      --border: #cde8e4;
+      --radius: 14px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: #fff; }
+
+    /* NAV */
+    nav { background: #fff; border-bottom: 1px solid var(--border); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 70px; position: sticky; top: 0; z-index: 100; }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo { width: 38px; height: 38px; background: var(--teal); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .nav-name { font-weight: 700; font-size: 17px; color: var(--text); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-phone { font-size: 14px; font-weight: 600; color: var(--teal); text-decoration: none; }
+    .nav-cta { background: var(--teal); color: #fff !important; padding: 10px 22px; border-radius: 8px; font-weight: 600 !important; font-size: 14px !important; }
+    .demo-ribbon { background: rgba(91,123,255,0.08); border-bottom: 1px solid rgba(91,123,255,0.25); text-align: center; padding: 8px; font-size: 12px; color: #7a9aff; letter-spacing: 0.5px; }
+    .demo-ribbon a { color: #a0b8ff; text-decoration: none; font-weight: 600; }
+
+    /* HERO */
+    .hero { background: var(--teal-pale); padding: 80px 5%; display: flex; align-items: center; gap: 60px; min-height: 540px; }
+    .hero-content { flex: 1; }
+    .hero-tag { display: inline-block; background: rgba(10,126,110,0.1); color: var(--teal); border-radius: 99px; padding: 6px 16px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 20px; }
+    .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(36px,5vw,56px); line-height: 1.1; color: var(--text); margin-bottom: 20px; }
+    .hero h1 em { font-style: italic; color: var(--teal); }
+    .hero p { font-size: 17px; color: var(--muted); line-height: 1.7; margin-bottom: 32px; max-width: 480px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-teal { background: var(--teal); color: #fff; padding: 14px 28px; border-radius: var(--radius); font-weight: 700; font-size: 15px; text-decoration: none; display: inline-block; transition: background .2s, transform .2s; }
+    .btn-teal:hover { background: #086057; transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--teal); padding: 14px 28px; border-radius: var(--radius); font-weight: 600; font-size: 15px; text-decoration: none; display: inline-block; border: 1.5px solid var(--teal); transition: background .2s; }
+    .btn-ghost:hover { background: rgba(10,126,110,0.07); }
+    .hero-visual { flex: 0 0 400px; }
+    .hero-card { background: #fff; border-radius: 20px; padding: 30px; box-shadow: 0 16px 50px rgba(10,126,110,0.12); }
+    .hero-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 18px; color: var(--text); }
+    .service-list { list-style: none; }
+    .service-list li { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 500; }
+    .service-list li:last-child { border-bottom: none; }
+    .check { width: 26px; height: 26px; background: var(--teal-pale); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--teal); font-size: 13px; flex-shrink: 0; }
+    .new-patients { margin-top: 20px; background: linear-gradient(135deg, var(--teal), var(--teal-light)); border-radius: 12px; padding: 16px 20px; color: #fff; font-size: 14px; font-weight: 600; text-align: center; }
+
+    /* SERVICES */
+    .section { padding: 80px 5%; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 50px; }
+    .eyebrow { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--teal); margin-bottom: 10px; }
+    .section-header h2 { font-family: 'DM Serif Display', serif; font-size: clamp(28px,4vw,40px); color: var(--text); margin-bottom: 12px; }
+    .section-header p { font-size: 16px; color: var(--muted); max-width: 500px; margin: 0 auto; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 22px; }
+    .s-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 28px 24px; transition: box-shadow .2s, transform .2s; }
+    .s-card:hover { box-shadow: 0 10px 30px rgba(10,126,110,0.1); transform: translateY(-3px); }
+    .s-icon { font-size: 28px; margin-bottom: 16px; }
+    .s-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .s-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--teal-pale); padding: 80px 5%; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; max-width: 1100px; margin: 0 auto; }
+    .review-card { background: #fff; border-radius: 16px; padding: 26px; box-shadow: 0 4px 16px rgba(10,126,110,0.06); }
+    .review-stars { color: #f5a623; font-size: 14px; margin-bottom: 12px; }
+    .review-text { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; font-style: italic; }
+    .reviewer { font-size: 13px; font-weight: 600; color: var(--text); }
+
+    /* CTA */
+    .cta { background: linear-gradient(135deg, var(--text) 0%, #1a3c5a 100%); padding: 80px 5%; text-align: center; color: #fff; }
+    .cta h2 { font-family: 'DM Serif Display', serif; font-size: clamp(28px,4vw,42px); margin-bottom: 16px; }
+    .cta p { font-size: 17px; color: rgba(255,255,255,0.7); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    footer { background: var(--text); color: rgba(255,255,255,0.55); text-align: center; padding: 28px 5%; font-size: 13px; }
+    footer a { color: #5b7bff; text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .hero { flex-direction: column; padding: 50px 5%; }
+      .hero-visual { flex: unset; width: 100%; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-ribbon">Demo site built by <a href="../portfolio.html">Mad Forge</a> &mdash; This is a portfolio example, not a real business listing.</div>
+  <nav>
+    <a class="nav-brand" href="#">
+      <div class="nav-logo">🦷</div>
+      <span class="nav-name">Lakeview Dental</span>
+    </a>
+    <div class="nav-links">
+      <a href="#">Services</a>
+      <a href="#">About</a>
+      <a href="#">Patient Info</a>
+      <a href="#" class="nav-phone">(608) 555-0241</a>
+      <a href="#" class="nav-cta">Book Appointment</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">&#10003; Accepting New Patients</div>
+      <h1>A Healthier Smile Starts <em>Here</em></h1>
+      <p>Family and cosmetic dentistry in a calm, modern office where your comfort is our priority — from routine cleanings to complete smile makeovers.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-teal">Book an Appointment</a>
+        <a href="#" class="btn-ghost">View Services</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <h3>Common Services &amp; Pricing</h3>
+        <ul class="service-list">
+          <li><div class="check">✓</div><span>New Patient Exam &amp; X-Rays — <strong>$99</strong></span></li>
+          <li><div class="check">✓</div><span>Routine Cleaning — <strong>$89</strong></span></li>
+          <li><div class="check">✓</div><span>Teeth Whitening — <strong>from $199</strong></span></li>
+          <li><div class="check">✓</div><span>Dental Implants — <strong>free consult</strong></span></li>
+          <li><div class="check">✓</div><span>Emergency Visits — <strong>same day</strong></span></li>
+        </ul>
+        <div class="new-patients">🎉 New patient special: Free whitening with first visit</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Our Services</div>
+        <h2>Complete Dental Care for the Whole Family</h2>
+        <p>We combine modern technology with a gentle touch to make every visit comfortable.</p>
+      </div>
+      <div class="services-grid">
+        <div class="s-card">
+          <div class="s-icon">🪥</div>
+          <h3>General Dentistry</h3>
+          <p>Cleanings, exams, fillings, and preventive care to keep your teeth healthy for life.</p>
+        </div>
+        <div class="s-card">
+          <div class="s-icon">✨</div>
+          <h3>Cosmetic Dentistry</h3>
+          <p>Veneers, bonding, and professional whitening to give you the smile you've always wanted.</p>
+        </div>
+        <div class="s-card">
+          <div class="s-icon">🧩</div>
+          <h3>Dental Implants</h3>
+          <p>Permanent, natural-looking tooth replacement with same-day consultations available.</p>
+        </div>
+        <div class="s-card">
+          <div class="s-icon">👦</div>
+          <h3>Pediatric Care</h3>
+          <p>Kid-friendly exams and cleanings in a welcoming environment that children actually enjoy.</p>
+        </div>
+        <div class="s-card">
+          <div class="s-icon">🦷</div>
+          <h3>Orthodontics</h3>
+          <p>Traditional braces and clear aligner options for teens and adults.</p>
+        </div>
+        <div class="s-card">
+          <div class="s-icon">🚨</div>
+          <h3>Emergency Dentistry</h3>
+          <p>Broken tooth? Severe pain? We reserve same-day slots for urgent dental needs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Patient Reviews</div>
+        <h2>What Our Patients Are Saying</h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Dr. Kim is absolutely the best. I've had dental anxiety my whole life and for the first time I actually look forward to my cleanings."</p>
+          <div class="reviewer">— Sarah T., Madison</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Got my implant consultation scheduled same day I called. The whole process was smooth and the staff couldn't be more professional."</p>
+          <div class="reviewer">— Marcus R., Middleton</div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"My kids used to dread the dentist. Now they ask when their next appointment is. Says everything you need to know about this office."</p>
+          <div class="reviewer">— Jen & Tom K., Sun Prairie</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Your Best Smile is One Visit Away</h2>
+    <p>New patients welcome. Most insurance accepted. Evening and Saturday appointments available.</p>
+    <a href="#" class="btn-teal">Book Your Appointment &rarr;</a>
+  </section>
+
+  <footer>
+    <p><strong style="color:#fff">Lakeview Dental</strong> &mdash; 4820 Lake View Blvd, Madison, WI &nbsp;|&nbsp; (608) 555-0241 &nbsp;|&nbsp; &copy; 2025</p>
+    <p style="margin-top: 8px; font-size: 11px;">Demo website designed by <a href="../portfolio.html">Mad Forge</a>. Content is fictional.</p>
+  </footer>
+</body>
+</html>

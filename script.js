@@ -1,201 +1,158 @@
-/* ============================================
-   MAD WEBSITES — MULTI-PAGE SCRIPT
-   ============================================ */
+/*
+  Mad Forge shared interactivity
+  - Sticky header style change
+  - Mobile navigation
+  - Dark/light mode with persistence
+  - Scroll reveal
+  - 3D tilt hover
+  - Contact form front-end validation
+*/
 
+const body = document.body;
+const topbar = document.querySelector('.topbar');
 const menuToggle = document.querySelector('.menu-toggle');
-const siteNav    = document.querySelector('.site-nav');
-const navLinks   = document.querySelectorAll('.site-nav a:not(.nav-cta)');
-const topbar     = document.querySelector('.topbar');
-const revealItems    = document.querySelectorAll('.reveal');
-const magneticTargets  = document.querySelectorAll('.btn, .nav-cta');
-const interactiveCards = document.querySelectorAll(
-  '.hero-card, .about-card, .about-visual, .service-card, .why-card, .timeline article, .faq-item'
-);
-const yearEl      = document.getElementById('year');
+const nav = document.getElementById('site-nav');
+const navLinks = document.querySelectorAll('.site-nav a');
+const themeToggle = document.getElementById('themeToggle');
+const themeLabel = document.getElementById('themeLabel');
+const revealItems = document.querySelectorAll('.reveal');
+const tiltCards = document.querySelectorAll('.tilt-card');
+const year = document.getElementById('year');
 const contactForm = document.getElementById('contactForm');
 const formMessage = document.getElementById('formMessage');
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const hasFinePointer       = window.matchMedia('(pointer: fine)').matches;
+const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
 
-const webAppUrl = 'https://script.google.com/macros/s/AKfycbxrOSd04c4SzMXN_6BUHFywyCzEAXd6S25QHCm06bmBg5r77a_mRqXg1PqRsZKt33at3w/exec';
-
-/* ─── SCROLL PROGRESS ─────────────────────── */
-const scrollProgress = document.createElement('div');
-scrollProgress.className = 'scroll-progress';
-scrollProgress.setAttribute('aria-hidden', 'true');
-document.body.appendChild(scrollProgress);
-
-/* ─── YEAR ────────────────────────────────── */
-if (yearEl) {
-  yearEl.textContent = new Date().getFullYear();
+if (year) {
+  year.textContent = new Date().getFullYear();
 }
 
-/* ─── MOBILE NAV ──────────────────────────── */
-if (menuToggle && siteNav) {
+const handleHeader = () => {
+  if (!topbar) return;
+  topbar.classList.toggle('scrolled', window.scrollY > 12);
+};
+window.addEventListener('scroll', handleHeader, { passive: true });
+handleHeader();
+
+if (menuToggle && nav) {
   menuToggle.addEventListener('click', () => {
     const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
     menuToggle.setAttribute('aria-expanded', String(!expanded));
-    siteNav.classList.toggle('open');
+    nav.classList.toggle('open');
   });
 
-  siteNav.querySelectorAll('a').forEach((link) => {
+  navLinks.forEach((link) => {
     link.addEventListener('click', () => {
-      siteNav.classList.remove('open');
       menuToggle.setAttribute('aria-expanded', 'false');
+      nav.classList.remove('open');
     });
+  });
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      menuToggle.setAttribute('aria-expanded', 'false');
+      nav.classList.remove('open');
+    }
   });
 }
 
-/* ─── SCROLL EVENTS ───────────────────────── */
-const onScroll = () => {
-  const scrollTop = window.scrollY;
-  const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+const pageName = window.location.pathname.split('/').pop() || 'index.html';
+navLinks.forEach((link) => {
+  const href = link.getAttribute('href');
+  if (!href || href.startsWith('mailto:') || href.startsWith('https://')) return;
+  link.classList.toggle('active', href === pageName);
+});
 
-  scrollProgress.style.setProperty('--progress', `${progress}%`);
-
-  if (topbar) {
-    topbar.classList.toggle('scrolled', scrollTop > 20);
+const applyTheme = (theme) => {
+  body.setAttribute('data-theme', theme);
+  if (themeLabel) {
+    themeLabel.textContent = theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode';
+  }
+  if (themeToggle) {
+    themeToggle.setAttribute('aria-label', themeLabel ? themeLabel.textContent : 'Toggle theme');
+    themeToggle.textContent = theme === 'light' ? 'D' : 'L';
   }
 };
 
-window.addEventListener('scroll', onScroll, { passive: true });
-onScroll();
+const savedTheme = localStorage.getItem('mf-theme');
+if (savedTheme === 'light' || savedTheme === 'dark') {
+  applyTheme(savedTheme);
+} else {
+  applyTheme('dark');
+}
 
-/* ─── REVEAL ON SCROLL ────────────────────── */
-const revealObserver = new IntersectionObserver(
-  (entries, obs) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('visible');
-      obs.unobserve(entry.target);
-    });
-  },
-  { threshold: 0.1 }
-);
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const nextTheme = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(nextTheme);
+    localStorage.setItem('mf-theme', nextTheme);
+  });
+}
 
-revealItems.forEach((item, index) => {
-  if (!item.style.getPropertyValue('--reveal-delay')) {
-    item.style.setProperty('--reveal-delay', `${index * 45}ms`);
-  }
-  revealObserver.observe(item);
-});
+if (!prefersReducedMotion && revealItems.length) {
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.12 }
+  );
 
-/* ─── 3D CARD TILT ────────────────────────── */
+  revealItems.forEach((item, index) => {
+    item.style.transitionDelay = `${Math.min(index * 45, 240)}ms`;
+    observer.observe(item);
+  });
+} else {
+  revealItems.forEach((item) => item.classList.add('visible'));
+}
+
 if (!prefersReducedMotion && hasFinePointer) {
-  interactiveCards.forEach((card) => {
-    card.classList.add('interactive-card');
-
-    card.addEventListener('pointermove', (e) => {
+  tiltCards.forEach((card) => {
+    card.addEventListener('pointermove', (event) => {
       const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = (e.clientY - rect.top) / rect.height;
-      card.style.setProperty('--rx', `${((0.5 - y) * 7).toFixed(2)}deg`);
-      card.style.setProperty('--ry', `${((x - 0.5) * 7).toFixed(2)}deg`);
-      card.style.setProperty('--lift', '-4px');
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+      const rotateY = (x - 0.5) * 10;
+      const rotateX = (0.5 - y) * 10;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-3px)`;
     });
 
     card.addEventListener('pointerleave', () => {
-      card.style.setProperty('--rx', '0deg');
-      card.style.setProperty('--ry', '0deg');
-      card.style.setProperty('--lift', '0px');
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
     });
   });
 }
 
-/* ─── MAGNETIC BUTTONS ────────────────────── */
-if (!prefersReducedMotion && hasFinePointer) {
-  magneticTargets.forEach((item) => {
-    item.classList.add('magnetic');
-
-    item.addEventListener('pointermove', (e) => {
-      const rect = item.getBoundingClientRect();
-      item.style.setProperty('--mx', `${(e.clientX - (rect.left + rect.width / 2)) * 0.15}px`);
-      item.style.setProperty('--my', `${(e.clientY - (rect.top + rect.height / 2)) * 0.18}px`);
-    });
-
-    item.addEventListener('pointerleave', () => {
-      item.style.setProperty('--mx', '0px');
-      item.style.setProperty('--my', '0px');
-    });
-  });
-}
-
-/* ─── RIPPLE ON CLICK ─────────────────────── */
-if (!prefersReducedMotion) {
-  magneticTargets.forEach((button) => {
-    button.addEventListener('pointerdown', (e) => {
-      const rect = button.getBoundingClientRect();
-      const ripple = document.createElement('span');
-      ripple.className = 'btn-ripple';
-      ripple.style.left = `${e.clientX - rect.left}px`;
-      ripple.style.top  = `${e.clientY - rect.top}px`;
-      button.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 700);
-    });
-  });
-}
-
-/* ─── CONTACT FORM ────────────────────────── */
 if (contactForm && formMessage) {
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  contactForm.addEventListener('submit', (event) => {
+    event.preventDefault();
 
-    const formData = new FormData(contactForm);
-    const name    = String(formData.get('name')    || '').trim();
-    const email   = String(formData.get('email')   || '').trim();
-    const details = String(formData.get('details') || '').trim();
-
-    if (!name || !email || !details) {
-      formMessage.textContent = 'Please complete all required fields.';
-      formMessage.className = 'form-note error';
-      return;
-    }
+    const data = new FormData(contactForm);
+    const name = String(data.get('name') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const service = String(data.get('service') || '').trim();
+    const message = String(data.get('message') || '').trim();
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      formMessage.textContent = 'Please enter a valid email address.';
-      formMessage.className = 'form-note error';
+
+    if (!name || !email || !service || !message) {
+      formMessage.textContent = 'Please complete all required fields.';
+      formMessage.className = 'form-note';
       return;
     }
 
-    const submitButton = contactForm.querySelector('button[type="submit"]');
-    if (submitButton) {
-      submitButton.disabled = true;
-      submitButton.textContent = 'Sending…';
+    if (!emailPattern.test(email)) {
+      formMessage.textContent = 'Please enter a valid email address.';
+      formMessage.className = 'form-note';
+      return;
     }
 
-    try {
-      const payload = new URLSearchParams();
-      formData.forEach((value, key) => payload.append(key, String(value).trim()));
-      payload.append('submittedAt', new Date().toISOString());
-      payload.append('sourcePage', window.location.href);
-
-      const response = await fetch(webAppUrl, {
-        method: 'POST',
-        mode: 'cors',
-        body: payload,
-      });
-
-      if (!response.ok) throw new Error(`Status ${response.status}`);
-
-      const result = await response.json();
-      if (result.result !== 'success' && !result.ok) {
-        throw new Error(result.message || 'Submission failed');
-      }
-
-      formMessage.textContent = 'Thanks! Your request has been submitted. We\'ll be in touch within 24 hours.';
-      formMessage.className = 'form-note success';
-      contactForm.reset();
-    } catch (_err) {
-      formMessage.textContent = 'Submission failed. Please try again or email us directly.';
-      formMessage.className = 'form-note error';
-    } finally {
-      if (submitButton) {
-        submitButton.disabled = false;
-        submitButton.textContent = 'Send Request →';
-      }
-    }
+    formMessage.textContent = 'Thanks. Your message looks great and is ready to be connected to your backend.';
+    formMessage.className = 'form-note success';
+    contactForm.reset();
   });
 }

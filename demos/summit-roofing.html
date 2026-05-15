@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Summit Roofing Co. | Expert Roofing in Dane County, WI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #c0392b;
+      --red-dark: #a03020;
+      --slate: #1e2a38;
+      --slate-mid: #2c3e52;
+      --light: #f6f8fa;
+      --border: #dde3eb;
+      --text: #1a2430;
+      --muted: #5a6d80;
+      --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: #fff; }
+
+    /* TOP BAR */
+    .topbar { background: var(--red); padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; }
+    .topbar-left { font-size: 13px; color: rgba(255,255,255,0.85); }
+    .topbar-right { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+
+    /* NAV */
+    nav { background: var(--slate); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 68px; position: sticky; top: 0; z-index: 100; }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+    .nav-name { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 20px; color: #fff; letter-spacing: 0.5px; }
+    .nav-name span { color: var(--red); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { background: var(--red); color: #fff !important; padding: 10px 22px; border-radius: 8px; font-weight: 600 !important; }
+    .demo-ribbon { background: rgba(91,123,255,0.08); border-bottom: 1px solid rgba(91,123,255,0.25); text-align: center; padding: 8px; font-size: 12px; color: #7a9aff; letter-spacing: 0.5px; }
+    .demo-ribbon a { color: #a0b8ff; text-decoration: none; font-weight: 600; }
+
+    /* HERO */
+    .hero { background: linear-gradient(rgba(28,38,52,0.85), rgba(28,38,52,0.92)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><path d="M0 20L20 0L40 20L20 40Z" fill="rgba(255,255,255,0.03)"/></svg>'); background-color: var(--slate); background-size: auto, 40px; padding: 90px 5% 80px; color: #fff; }
+    .hero-inner { max-width: 680px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(192,57,43,0.2); border: 1px solid rgba(192,57,43,0.4); color: #ff8070; border-radius: 6px; padding: 7px 14px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 22px; }
+    .hero h1 { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: clamp(38px,5.5vw,64px); line-height: 1.05; margin-bottom: 20px; letter-spacing: 0.5px; }
+    .hero h1 span { color: var(--red); }
+    .hero p { font-size: 17px; color: rgba(255,255,255,0.72); line-height: 1.7; margin-bottom: 34px; max-width: 520px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
+    .btn-red { background: var(--red); color: #fff; padding: 14px 30px; border-radius: var(--radius); font-weight: 700; font-size: 15px; text-decoration: none; display: inline-block; transition: background .2s, transform .2s; }
+    .btn-red:hover { background: var(--red-dark); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: #fff; padding: 14px 30px; border-radius: var(--radius); font-weight: 600; font-size: 15px; text-decoration: none; display: inline-block; border: 1.5px solid rgba(255,255,255,0.3); transition: border-color .2s; }
+    .btn-outline:hover { border-color: #fff; }
+    .trust-badges { display: flex; gap: 20px; flex-wrap: wrap; }
+    .badge { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.7); }
+    .badge-icon { font-size: 16px; }
+
+    /* SERVICES */
+    .services { padding: 80px 5%; background: var(--light); }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 50px; }
+    .eyebrow { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--red); margin-bottom: 10px; }
+    .section-header h2 { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: clamp(28px,4vw,40px); color: var(--text); margin-bottom: 12px; letter-spacing: 0.3px; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+    .s-card { background: #fff; border-radius: 14px; padding: 28px 24px; border: 1px solid var(--border); transition: box-shadow .2s, transform .2s; }
+    .s-card:hover { box-shadow: 0 10px 32px rgba(0,0,0,0.08); transform: translateY(-4px); }
+    .s-icon { font-size: 30px; margin-bottom: 16px; }
+    .s-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .s-card p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* BEFORE/AFTER */
+    .ba-section { padding: 80px 5%; }
+    .ba-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; max-width: 1100px; margin: 0 auto; }
+    .ba-card { border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+    .ba-images { display: grid; grid-template-columns: 1fr 1fr; }
+    .ba-img { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .ba-before { background: linear-gradient(135deg, #8a8a8a, #5a5a5a); color: rgba(255,255,255,0.7); }
+    .ba-after { background: linear-gradient(135deg, var(--slate), var(--slate-mid)); color: rgba(255,255,255,0.85); }
+    .ba-info { padding: 18px 20px; }
+    .ba-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .ba-info p { font-size: 13px; color: var(--muted); }
+    .ba-tag { display: inline-block; background: rgba(192,57,43,0.1); color: var(--red); border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+
+    /* CTA */
+    .cta { background: var(--slate); color: #fff; padding: 80px 5%; text-align: center; }
+    .cta h2 { font-family: 'Oswald', sans-serif; font-size: clamp(28px,4vw,44px); font-weight: 700; margin-bottom: 16px; letter-spacing: 0.3px; }
+    .cta p { font-size: 17px; color: rgba(255,255,255,0.7); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .cta-disclaimer { margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.45); }
+
+    footer { background: #101820; color: rgba(255,255,255,0.5); text-align: center; padding: 28px 5%; font-size: 13px; }
+    footer a { color: #5b7bff; text-decoration: none; }
+
+    @media (max-width: 768px) { .nav-links { display: none; } .topbar { flex-direction: column; gap: 4px; text-align: center; } }
+  </style>
+</head>
+<body>
+  <div class="demo-ribbon">Demo site built by <a href="../portfolio.html">Mad Forge</a> &mdash; This is a portfolio example, not a real business listing.</div>
+  <div class="topbar">
+    <span class="topbar-left">📍 Serving Madison, Fitchburg, Middleton, Sun Prairie & surrounding Dane County</span>
+    <span class="topbar-right">📞 (608) 555-0374</span>
+  </div>
+  <nav>
+    <a class="nav-brand" href="#">
+      <div class="nav-logo">🏠</div>
+      <span class="nav-name">SUMMIT <span>ROOFING</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#">Services</a>
+      <a href="#">Projects</a>
+      <a href="#">Reviews</a>
+      <a href="#">About</a>
+      <a href="#" class="nav-cta">Free Estimate</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">⚡ Fast Estimates · Local Crew · 5-Star Rated</div>
+      <h1>Dane County's Most Trusted <span>Roofing Company</span></h1>
+      <p>Roof repairs, full replacements, storm damage restoration, and gutters — done right the first time by a local crew that takes pride in every project.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-red">Get a Free Estimate</a>
+        <a href="#" class="btn-outline">View Our Work</a>
+      </div>
+      <div class="trust-badges">
+        <div class="badge"><span class="badge-icon">✅</span> 500+ Roofs Replaced</div>
+        <div class="badge"><span class="badge-icon">🛡️</span> 10-Year Workmanship Warranty</div>
+        <div class="badge"><span class="badge-icon">⭐</span> 4.9 Stars on Google</div>
+        <div class="badge"><span class="badge-icon">🏠</span> GAF Certified Installer</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">What We Do</div>
+        <h2>Complete Roofing Services</h2>
+      </div>
+      <div class="services-grid">
+        <div class="s-card">
+          <div class="s-icon">🔨</div>
+          <h3>Full Roof Replacement</h3>
+          <p>Complete tear-off and installation with premium shingles backed by manufacturer warranties.</p>
+        </div>
+        <div class="s-card">
+          <div class="s-icon">🔧</div>
+          <h3>Roof Repairs</h3>
+          <p>From small leak fixes to major section repairs — we diagnose accurately and fix it fast.</p>
+        </div>
+        <div class="s-card">
+          <div class="s-icon">⛈️</div>
+          <h3>Storm Damage Restoration</h3>
+          <p>Hail and wind damage specialists with full insurance claim assistance at no extra cost.</p>
+        </div>
+        <div class="s-card">
+          <div class="s-icon">🌊</div>
+          <h3>Gutter Services</h3>
+          <p>New gutter installation, repairs, cleaning, and leaf guard systems to protect your foundation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ba-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Recent Projects</div>
+        <h2>Before &amp; After Project Highlights</h2>
+      </div>
+      <div class="ba-grid">
+        <div class="ba-card">
+          <div class="ba-images">
+            <div class="ba-img ba-before">Before</div>
+            <div class="ba-img ba-after">After</div>
+          </div>
+          <div class="ba-info">
+            <div class="ba-tag">Complete Replacement</div>
+            <h4>Middleton Ranch Home — Full Tear-Off</h4>
+            <p>3,200 sq ft tear-off and replacement with GAF Timberline HDZ shingles. Completed in one day.</p>
+          </div>
+        </div>
+        <div class="ba-card">
+          <div class="ba-images">
+            <div class="ba-img ba-before">Before</div>
+            <div class="ba-img ba-after">After</div>
+          </div>
+          <div class="ba-info">
+            <div class="ba-tag">Storm Damage</div>
+            <h4>Sun Prairie Colonial — Hail Damage Claim</h4>
+            <p>Handled full insurance claim process for hail damage. New roof installed within 5 days of approval.</p>
+          </div>
+        </div>
+        <div class="ba-card">
+          <div class="ba-images">
+            <div class="ba-img ba-before">Before</div>
+            <div class="ba-img ba-after">After</div>
+          </div>
+          <div class="ba-info">
+            <div class="ba-tag">Repair</div>
+            <h4>Fitchburg Tudor — Valley &amp; Flashing Repair</h4>
+            <p>Persistent leak traced to failed valley flashing. Repaired and sealed with upgraded materials.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Get Your Free Roof Estimate Today</h2>
+    <p>No pressure, no obligation — just an honest assessment from a local expert. Most estimates are same-week.</p>
+    <a href="#" class="btn-red">Request My Free Estimate &rarr;</a>
+    <p class="cta-disclaimer">We service all of Dane County. Same-week appointments available.</p>
+  </section>
+
+  <footer>
+    <p><strong style="color:#fff">Summit Roofing Co.</strong> &mdash; Madison, WI &nbsp;|&nbsp; Licensed &amp; Insured &nbsp;|&nbsp; GAF Certified &nbsp;|&nbsp; &copy; 2025</p>
+    <p style="margin-top: 8px; font-size: 11px;">Demo website designed by <a href="../portfolio.html">Mad Forge</a>. Content is fictional.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Northside HVAC | Heating & Cooling Madison, WI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow:wght@700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0b1f3a;
+      --blue: #1a5fad;
+      --sky: #3aa0e8;
+      --orange: #f47c20;
+      --light: #f4f8ff;
+      --text: #1a2740;
+      --muted: #5a6e8c;
+      --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: #fff; }
+
+    /* NAV */
+    nav { background: var(--navy); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 68px; position: sticky; top: 0; z-index: 100; }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo { width: 38px; height: 38px; background: var(--orange); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: 'Barlow', sans-serif; font-weight: 900; font-size: 18px; color: #fff; }
+    .nav-name { color: #fff; font-weight: 700; font-size: 17px; letter-spacing: -0.2px; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { background: var(--orange); color: #fff !important; padding: 10px 22px; border-radius: 8px; font-weight: 600 !important; font-size: 14px !important; }
+    .nav-cta:hover { background: #e06a10 !important; }
+    .demo-ribbon { background: rgba(91,123,255,0.15); border-bottom: 1px solid rgba(91,123,255,0.3); text-align: center; padding: 8px; font-size: 12px; color: #7a9aff; letter-spacing: 0.5px; }
+    .demo-ribbon a { color: #a0b8ff; text-decoration: none; font-weight: 600; }
+    .demo-ribbon a:hover { text-decoration: underline; }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, #0d2a50 60%, #0e3060 100%); color: #fff; padding: 90px 5% 80px; display: flex; align-items: center; gap: 60px; min-height: 560px; }
+    .hero-content { flex: 1; max-width: 560px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(244,124,32,0.15); border: 1px solid rgba(244,124,32,0.4); border-radius: 99px; padding: 6px 14px; font-size: 12px; font-weight: 600; color: #f47c20; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 22px; }
+    .hero h1 { font-family: 'Barlow', sans-serif; font-weight: 900; font-size: clamp(38px,5vw,58px); line-height: 1.05; margin-bottom: 20px; }
+    .hero h1 span { color: var(--sky); }
+    .hero p { font-size: 17px; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 34px; max-width: 460px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary { background: var(--orange); color: #fff; padding: 14px 28px; border-radius: var(--radius); font-weight: 700; font-size: 15px; text-decoration: none; display: inline-block; transition: transform .2s, box-shadow .2s; box-shadow: 0 6px 20px rgba(244,124,32,0.4); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(244,124,32,0.5); }
+    .btn-outline { background: transparent; color: #fff; padding: 14px 28px; border-radius: var(--radius); font-weight: 600; font-size: 15px; text-decoration: none; display: inline-block; border: 1.5px solid rgba(255,255,255,0.3); transition: border-color .2s, background .2s; }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.07); }
+    .hero-card { flex: 0 0 340px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 18px; padding: 32px; backdrop-filter: blur(10px); }
+    .hero-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; color: #fff; }
+    .trust-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; }
+    .trust-icon { width: 40px; height: 40px; background: rgba(58,160,232,0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .trust-label { font-size: 13px; font-weight: 600; color: #fff; }
+    .trust-sub { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+    .rating { display: flex; align-items: center; gap: 8px; margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.12); }
+    .stars { color: #f5c542; font-size: 15px; letter-spacing: 2px; }
+    .rating-text { font-size: 13px; color: rgba(255,255,255,0.7); }
+
+    /* SERVICES */
+    .services { background: var(--light); padding: 80px 5%; }
+    .section-header { text-align: center; margin-bottom: 52px; }
+    .eyebrow { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--blue); margin-bottom: 10px; }
+    .section-header h2 { font-family: 'Barlow', sans-serif; font-weight: 800; font-size: clamp(28px,4vw,40px); color: var(--text); margin-bottom: 14px; }
+    .section-header p { font-size: 16px; color: var(--muted); max-width: 520px; margin: 0 auto; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+    .service-card { background: #fff; border-radius: 16px; padding: 32px 28px; border: 1px solid #dde7f5; transition: box-shadow .2s, transform .2s; }
+    .service-card:hover { box-shadow: 0 12px 36px rgba(26,95,173,0.12); transform: translateY(-4px); }
+    .service-icon { width: 52px; height: 52px; background: linear-gradient(135deg, var(--blue), var(--sky)); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 18px; }
+    .service-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+    .service-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    /* PROCESS */
+    .process { padding: 80px 5%; max-width: 1100px; margin: 0 auto; }
+    .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; position: relative; }
+    .step { text-align: center; padding: 20px; }
+    .step-num { width: 52px; height: 52px; background: var(--navy); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Barlow', sans-serif; font-weight: 800; font-size: 20px; margin: 0 auto 16px; }
+    .step h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: 13px; color: var(--muted); }
+
+    /* CTA */
+    .cta-section { background: linear-gradient(135deg, var(--navy), var(--blue)); padding: 80px 5%; text-align: center; color: #fff; }
+    .cta-section h2 { font-family: 'Barlow', sans-serif; font-weight: 900; font-size: clamp(28px,4vw,44px); margin-bottom: 16px; }
+    .cta-section p { font-size: 17px; color: rgba(255,255,255,0.75); margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-phone { font-family: 'Barlow', sans-serif; font-weight: 800; font-size: 36px; color: var(--sky); margin-bottom: 28px; display: block; }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: rgba(255,255,255,0.6); text-align: center; padding: 32px 5%; font-size: 13px; }
+    footer strong { color: #fff; }
+
+    @media (max-width: 768px) {
+      .hero { flex-direction: column; padding: 60px 5%; }
+      .hero-card { flex: unset; width: 100%; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-ribbon">Demo site built by <a href="../portfolio.html">Mad Forge</a> &mdash; This is a portfolio example, not a real business listing.</div>
+  <nav>
+    <a class="nav-brand" href="#">
+      <div class="nav-logo">NH</div>
+      <span class="nav-name">Northside HVAC</span>
+    </a>
+    <div class="nav-links">
+      <a href="#">Services</a>
+      <a href="#">About</a>
+      <a href="#">Reviews</a>
+      <a href="#" class="nav-cta">Get a Free Quote</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">&#9733; Serving Madison Since 2008</div>
+      <h1>Comfort You Can <span>Count On</span>, Year Round</h1>
+      <p>From emergency repairs to full system installations, Northside HVAC keeps your home comfortable in every season — on time, on budget.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary">Get a Free Quote</a>
+        <a href="#" class="btn-outline">Our Services</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Why Homeowners Choose Us</h3>
+      <div class="trust-item">
+        <div class="trust-icon">⚡</div>
+        <div>
+          <div class="trust-label">Same-Day Service Available</div>
+          <div class="trust-sub">We respond within 2 hours for emergencies</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🛡️</div>
+        <div>
+          <div class="trust-label">Licensed & Fully Insured</div>
+          <div class="trust-sub">EPA certified technicians since 2008</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">💰</div>
+        <div>
+          <div class="trust-label">Transparent Flat-Rate Pricing</div>
+          <div class="trust-sub">No surprise fees, ever</div>
+        </div>
+      </div>
+      <div class="rating">
+        <div class="stars">★★★★★</div>
+        <div class="rating-text">4.9 stars · 312 Google reviews</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="section-header">
+      <div class="eyebrow">What We Do</div>
+      <h2>Full-Service Heating & Cooling</h2>
+      <p>Residential and light commercial HVAC solutions for every need.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🌡️</div>
+        <h3>Furnace Repair & Install</h3>
+        <p>Fast diagnosis and repair for all furnace brands, plus energy-efficient new installations with warranty coverage.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">❄️</div>
+        <h3>AC Repair & Install</h3>
+        <p>Central air and ductless mini-split systems installed and serviced by certified technicians.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <h3>Preventive Maintenance</h3>
+        <p>Seasonal tune-ups that extend equipment life and catch small issues before they become costly.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💨</div>
+        <h3>Indoor Air Quality</h3>
+        <p>Air purifiers, humidifiers, and UV systems to keep your family breathing clean air.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 80px 5%; max-width: 1100px; margin: 0 auto;">
+    <div class="section-header">
+      <div class="eyebrow">How It Works</div>
+      <h2>Simple. Fast. Reliable.</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; text-align: center;">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Call or Request Online</h4>
+        <p>Reach us anytime — we answer live 7 days a week.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Get a Free Estimate</h4>
+        <p>Transparent quote before any work begins.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>We Come to You</h4>
+        <p>Certified tech arrives on time in a marked truck.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Problem Solved</h4>
+        <p>Work backed by our 1-year labor guarantee.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>Ready for Same-Day Service?</h2>
+    <p>Don't sweat it — or freeze. Call now and we'll have a tech at your door.</p>
+    <span class="cta-phone">(608) 555-0182</span>
+    <a href="#" class="btn-primary">Schedule Online &rarr;</a>
+  </section>
+
+  <footer>
+    <p><strong>Northside HVAC</strong> &mdash; Madison, WI &nbsp;|&nbsp; Licensed, Bonded & Insured &nbsp;|&nbsp; &copy; 2025</p>
+    <p style="margin-top: 8px; font-size: 11px;">Demo website designed by <a href="../portfolio.html" style="color: #5b7bff;">Mad Forge</a>. Content is fictional.</p>
+  </footer>
+</body>
+</html>

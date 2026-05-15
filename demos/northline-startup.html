@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Northline | The Smarter Way to Manage Field Teams</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #060a14;
+      --bg-2: #0b1222;
+      --card: #0e1828;
+      --border: rgba(255,255,255,0.07);
+      --indigo: #4f6ef7;
+      --indigo-light: #7b93ff;
+      --cyan: #00d4c8;
+      --text: #e8eeff;
+      --muted: #7a8db0;
+      --radius: 14px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg); }
+
+    /* NAV */
+    nav { padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 68px; position: sticky; top: 0; z-index: 100; background: rgba(6,10,20,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .brand-mark { width: 32px; height: 32px; background: linear-gradient(135deg, var(--indigo), var(--cyan)); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .brand-mark svg { width: 18px; height: 18px; fill: #fff; }
+    .brand-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px; color: var(--text); letter-spacing: -0.3px; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--indigo); color: #fff !important; padding: 9px 20px; border-radius: 8px; font-weight: 600 !important; font-size: 14px !important; }
+    .nav-login { background: transparent; color: var(--text) !important; padding: 9px 20px; border-radius: 8px; border: 1px solid var(--border); transition: border-color .2s; }
+    .nav-login:hover { border-color: rgba(255,255,255,0.2) !important; }
+    .demo-ribbon { background: rgba(79,110,247,0.1); border-bottom: 1px solid rgba(79,110,247,0.25); text-align: center; padding: 8px; font-size: 12px; color: #7a9aff; letter-spacing: 0.5px; }
+    .demo-ribbon a { color: #a0b8ff; text-decoration: none; font-weight: 600; }
+
+    /* HERO */
+    .hero { padding: 100px 5% 80px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 500px; background: radial-gradient(ellipse, rgba(79,110,247,0.15) 0%, transparent 65%); pointer-events: none; }
+    .hero::after { content: ''; position: absolute; top: 60px; left: 50%; transform: translateX(-50%); width: 500px; height: 300px; background: radial-gradient(ellipse, rgba(0,212,200,0.08) 0%, transparent 65%); pointer-events: none; }
+    .hero-tag { position: relative; display: inline-flex; align-items: center; gap: 8px; background: rgba(79,110,247,0.12); border: 1px solid rgba(79,110,247,0.3); border-radius: 99px; padding: 7px 16px; font-size: 12px; font-weight: 600; color: var(--indigo-light); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 30px; z-index: 1; }
+    .hero h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(40px,6vw,70px); line-height: 1.05; margin-bottom: 22px; letter-spacing: -1.5px; position: relative; z-index: 1; }
+    .hero h1 .grad { background: linear-gradient(90deg, var(--indigo-light) 0%, var(--cyan) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { font-size: 18px; color: var(--muted); max-width: 540px; margin: 0 auto 40px; line-height: 1.65; position: relative; z-index: 1; }
+    .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; margin-bottom: 60px; }
+    .btn-indigo { background: var(--indigo); color: #fff; padding: 15px 32px; border-radius: var(--radius); font-weight: 700; font-size: 15px; text-decoration: none; display: inline-block; transition: background .2s, transform .2s; box-shadow: 0 8px 24px rgba(79,110,247,0.3); }
+    .btn-indigo:hover { background: #3d5ce0; transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--text); padding: 15px 32px; border-radius: var(--radius); font-weight: 600; font-size: 15px; text-decoration: none; display: inline-block; border: 1px solid var(--border); transition: border-color .2s; }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.25); }
+
+    /* PRODUCT MOCKUP */
+    .mockup { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; }
+    .mockup-bar { background: rgba(255,255,255,0.04); padding: 12px 18px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
+    .dot-r { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; }
+    .dot-y { width: 12px; height: 12px; border-radius: 50%; background: #febc2e; }
+    .dot-g { width: 12px; height: 12px; border-radius: 50%; background: #28c840; }
+    .url-bar { flex: 1; background: rgba(255,255,255,0.06); border-radius: 6px; padding: 6px 14px; font-size: 12px; color: var(--muted); max-width: 300px; margin: 0 auto; }
+    .mockup-content { padding: 28px; }
+    .dash-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 20px; }
+    .dash-stat { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+    .dash-stat-val { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--text); }
+    .dash-stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .dash-stat-change { font-size: 11px; color: var(--cyan); margin-top: 4px; font-weight: 600; }
+    .dash-map { background: rgba(79,110,247,0.06); border: 1px solid rgba(79,110,247,0.15); border-radius: 12px; height: 120px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--muted); }
+
+    /* FEATURES */
+    .features { padding: 80px 5%; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 52px; }
+    .eyebrow { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--indigo-light); margin-bottom: 10px; }
+    .section-header h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(28px,4vw,40px); margin-bottom: 12px; letter-spacing: -0.5px; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+    .f-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 28px 24px; transition: border-color .25s, transform .25s; }
+    .f-card:hover { border-color: rgba(79,110,247,0.35); transform: translateY(-3px); }
+    .f-icon { width: 46px; height: 46px; background: rgba(79,110,247,0.12); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 18px; }
+    .f-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+    .f-card p { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* PRICING */
+    .pricing { padding: 80px 5%; background: var(--bg-2); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto; }
+    .plan { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 32px 28px; }
+    .plan.featured { border-color: rgba(79,110,247,0.5); background: rgba(79,110,247,0.06); }
+    .plan-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 14px; }
+    .plan.featured .plan-label { color: var(--indigo-light); }
+    .plan-price { font-family: 'Space Grotesk', sans-serif; font-size: 42px; font-weight: 700; letter-spacing: -1px; margin-bottom: 4px; }
+    .plan-price span { font-size: 16px; font-weight: 500; color: var(--muted); }
+    .plan-desc { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+    .plan-features { list-style: none; margin-bottom: 28px; }
+    .plan-features li { display: flex; align-items: center; gap: 10px; font-size: 14px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .plan-features li:last-child { border-bottom: none; }
+    .check { color: var(--cyan); font-size: 13px; }
+
+    /* CTA */
+    .cta { padding: 100px 5%; text-align: center; }
+    .cta h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(30px,5vw,52px); font-weight: 700; margin-bottom: 18px; letter-spacing: -0.8px; }
+    .cta p { font-size: 17px; color: var(--muted); max-width: 440px; margin: 0 auto 36px; line-height: 1.65; }
+    .cta-sub { font-size: 13px; color: var(--muted); margin-top: 14px; }
+
+    footer { border-top: 1px solid var(--border); padding: 28px 5%; text-align: center; font-size: 13px; color: var(--muted); }
+    footer a { color: #5b7bff; text-decoration: none; }
+
+    @media (max-width: 768px) { .nav-links { display: none; } .dash-row { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body>
+  <div class="demo-ribbon">Demo site built by <a href="../portfolio.html">Mad Forge</a> &mdash; This is a portfolio example, not a real business listing.</div>
+  <nav>
+    <a class="nav-brand" href="#">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24"><path d="M3 12L12 3L21 12V21H15V15H9V21H3V12Z"/></svg>
+      </div>
+      <span class="brand-name">Northline</span>
+    </a>
+    <div class="nav-links">
+      <a href="#">Product</a>
+      <a href="#">Pricing</a>
+      <a href="#">Customers</a>
+      <a href="#" class="nav-login">Log In</a>
+      <a href="#" class="nav-cta">Start Free Trial</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-tag">🚀 Now in public beta — join 800+ teams</div>
+    <h1>Field Operations,<br><span class="grad">Finally Under Control</span></h1>
+    <p>Northline gives service teams a real-time command center to dispatch, track, and optimize field crews — without the spreadsheets.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn-indigo">Start Free Trial &rarr;</a>
+      <a href="#" class="btn-ghost">Watch Demo</a>
+    </div>
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+        <div class="url-bar">app.northline.io/dashboard</div>
+      </div>
+      <div class="mockup-content">
+        <div class="dash-row">
+          <div class="dash-stat">
+            <div class="dash-stat-val">24</div>
+            <div class="dash-stat-label">Active Jobs</div>
+            <div class="dash-stat-change">↑ 3 today</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-val">97%</div>
+            <div class="dash-stat-label">On-Time Rate</div>
+            <div class="dash-stat-change">↑ 4% vs last wk</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-val">18</div>
+            <div class="dash-stat-label">Techs On Route</div>
+            <div class="dash-stat-change">↑ 2 dispatched</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-val">$14k</div>
+            <div class="dash-stat-label">Revenue Today</div>
+            <div class="dash-stat-change">↑ 12% vs avg</div>
+          </div>
+        </div>
+        <div class="dash-map">🗺️ Live crew tracking map — 18 technicians active across 6 service zones</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Platform Features</div>
+        <h2>Everything Your Team Needs</h2>
+      </div>
+      <div class="features-grid">
+        <div class="f-card">
+          <div class="f-icon">📡</div>
+          <h3>Real-Time Dispatch</h3>
+          <p>Assign jobs, track technicians live, and update schedules without a phone call.</p>
+        </div>
+        <div class="f-card">
+          <div class="f-icon">📋</div>
+          <h3>Digital Work Orders</h3>
+          <p>Field teams complete jobs on mobile. Photos, signatures, and notes sync instantly.</p>
+        </div>
+        <div class="f-card">
+          <div class="f-icon">📊</div>
+          <h3>Operations Analytics</h3>
+          <p>Spot bottlenecks, measure team performance, and optimize routes with live dashboards.</p>
+        </div>
+        <div class="f-card">
+          <div class="f-icon">🔗</div>
+          <h3>CRM & Billing Integration</h3>
+          <p>Connects natively with Salesforce, QuickBooks, and 30+ tools your team already uses.</p>
+        </div>
+        <div class="f-card">
+          <div class="f-icon">💬</div>
+          <h3>Customer Notifications</h3>
+          <p>Automated SMS updates keep customers informed without your team lifting a finger.</p>
+        </div>
+        <div class="f-card">
+          <div class="f-icon">🛡️</div>
+          <h3>SOC 2 Compliant</h3>
+          <p>Enterprise-grade security, role-based access control, and end-to-end encryption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Pricing</div>
+        <h2>Simple, Scalable Plans</h2>
+      </div>
+      <div class="pricing-grid">
+        <div class="plan">
+          <div class="plan-label">Starter</div>
+          <div class="plan-price">$79<span>/mo</span></div>
+          <div class="plan-desc">Up to 5 field technicians. Great for small crews.</div>
+          <ul class="plan-features">
+            <li><span class="check">✓</span> Live dispatch & tracking</li>
+            <li><span class="check">✓</span> Digital work orders</li>
+            <li><span class="check">✓</span> Customer notifications</li>
+            <li><span class="check">✓</span> Basic reporting</li>
+          </ul>
+          <a href="#" class="btn-ghost" style="display:block;text-align:center;">Start Free Trial</a>
+        </div>
+        <div class="plan featured">
+          <div class="plan-label">Growth ✦ Most Popular</div>
+          <div class="plan-price">$199<span>/mo</span></div>
+          <div class="plan-desc">Up to 20 technicians + full analytics suite.</div>
+          <ul class="plan-features">
+            <li><span class="check">✓</span> Everything in Starter</li>
+            <li><span class="check">✓</span> Advanced analytics</li>
+            <li><span class="check">✓</span> CRM & billing integrations</li>
+            <li><span class="check">✓</span> Route optimization</li>
+            <li><span class="check">✓</span> Priority support</li>
+          </ul>
+          <a href="#" class="btn-indigo" style="display:block;text-align:center;">Start Free Trial</a>
+        </div>
+        <div class="plan">
+          <div class="plan-label">Enterprise</div>
+          <div class="plan-price">Custom</div>
+          <div class="plan-desc">Unlimited technicians, dedicated CSM, and SSO.</div>
+          <ul class="plan-features">
+            <li><span class="check">✓</span> Everything in Growth</li>
+            <li><span class="check">✓</span> Unlimited technicians</li>
+            <li><span class="check">✓</span> SSO &amp; custom roles</li>
+            <li><span class="check">✓</span> Dedicated account manager</li>
+          </ul>
+          <a href="#" class="btn-ghost" style="display:block;text-align:center;">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Join 800+ Teams Using Northline</h2>
+    <p>Start your 14-day free trial. No credit card required. Cancel anytime.</p>
+    <a href="#" class="btn-indigo">Start Free Trial &rarr;</a>
+    <p class="cta-sub">Questions? Talk to a real human at hello@northline.io</p>
+  </section>
+
+  <footer>
+    <p><strong style="color: #e8eeff;">Northline</strong> &nbsp;|&nbsp; Field Operations Software &nbsp;|&nbsp; &copy; 2025 Northline Inc.</p>
+    <p style="margin-top: 8px; font-size: 11px;">Demo website designed by <a href="../portfolio.html">Mad Forge</a>. Content is fictional.</p>
+  </footer>
+</body>
+</html>
